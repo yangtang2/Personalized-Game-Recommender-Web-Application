@@ -1,0 +1,151 @@
+<% var games, duplicate; %>
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/header') %>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f0e68c;
+    }
+    td button {
+      background-color: #dc143c;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <%- include('partials/navbar') %>
+    <div class="container mt-4">
+      <div class="card">
+        <div class="card-body">
+          <h3>Search for a game:</h3>
+          <form action="search" method="POST">
+            <div class="form-group">
+              <label for="name">Game Name</label>
+              <input
+                type="text"
+                class="form-control col-lg-9"
+                id="name"
+                aria-describedby="emailHelp"
+                placeholder="Enter Game"
+                name="name"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      <div>
+        <% if (locals.duplicate) { %>
+        <p style="color: red"><%= duplicate %></p>
+        <% } %>
+      </div>
+
+      <% if (locals.searchResults) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Game Name</th>
+            <th>Release Date</th>
+            <th>Game Link</th>
+            <th>Update</th>
+            <th>Delete</th>
+            <th>Purchase [Hours]</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < searchResults.length; i++) { %>
+          <tr>
+            <td><%= searchResults[i].name %></td>
+            <td><%= searchResults[i].release_date %></td>
+            <td><%= searchResults[i].game_link %></td>
+            <td>
+              <form action="/update" method="post">
+                <input
+                  type="hidden"
+                  name="id"
+                  value="<%= searchResults[i].game_id %>"
+                />
+                <button class="bg-primary" type="submit">UPDATE</button>
+              </form>
+            </td>
+            <td>
+              <form action="/delete" method="post">
+                <input
+                  type="hidden"
+                  name="id"
+                  value="<%= searchResults[i].game_id %>"
+                />
+                <button type="submit">DELETE</button>
+              </form>
+            </td>
+            <td>
+              <form id="purchaseForm" action="/purchase" method="post">
+                <input
+                  type="hidden"
+                  name="id"
+                  value="<%= searchResults[i].game_id %>"
+                />
+                <div style="display: flex; flex-direction: row; gap: 2rem">
+                  <button class="btn btn-success" type="submit">
+                    PURCHASE
+                  </button>
+                  <input type="input" id="inputHours" name="hours" value="" />
+                </div>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } %>
+    </div>
+  </body>
+  <script>
+    // function submitForm() {
+    //   const hours = prompt("How many hours have you played this game?");
+
+    //   const form = document.getElementById("purchaseForm");
+
+    //   const hiddenInput = document.createElement("input");
+    //   hiddenInput.type = "hidden";
+    //   hiddenInput.name = "hours";
+    //   hiddenInput.value = hours;
+
+    //   form.appendChild(hiddenInput);
+
+    //   form.submit();
+    // }
+    // console.log("hello");
+    // function onSubmitForm() {
+    //   console.log("here");
+    //   // e.preventDefault();
+    //   const hours = prompt("How long have you played this game?");
+    //   document.getElementById("inputHours").value = hours;
+
+    //   const form = document.querySelector("#purchaseForm");
+    //   form.submit();
+    // }
+
+    // function onSubmit() {
+    //   document.addEventListener("DOMContentLoaded", function () {
+    //     const hours = prompt("How long have you played this game?");
+    //     document.getElementById("inputHours").value = hours;
+
+    //     const form = document.querySelector("#purchaseForm");
+    //     form.submit();
+    //   });
+    // }
+  </script>
+</html>

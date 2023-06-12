@@ -1,0 +1,93 @@
+<% var statistics; %>
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/header') %>
+  <style>
+    /* table, */
+    /* th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 10px;
+      text-align: center;
+    } */
+    th {
+      background-color: #f0e68c;
+    }
+    td button {
+      background-color: #dc143c;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .box {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  </style>
+  <body>
+    <%- include('partials/navbar') %>
+    <div class="container mt-4">
+      <div class="card">
+        <div class="card-body">
+          <h3>Global Statistics</h3>
+          <div>
+            <div class="box">
+              <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Game ID</th>
+                    <th scope="col">Game Name</th>
+                    <th scope="col">Popularity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (var i = 0; i < globalStatistics.length; i++) { %>
+                  <tr>
+                    <td><%= globalStatistics[i].genre %></td>
+                    <td><%= globalStatistics[i].game_id %></td>
+                    <td><%= globalStatistics[i].game_name %></td>
+                    <td><%= globalStatistics[i].popularity %></td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+          </div>
+        </div>
+        <hr>
+        <h3>User Statistics</h3>
+          <div>
+            <div class="box">
+              <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Play Time</th>
+                    <th scope="col">Number of Games</th>
+                    <th scope="col">Average Popularity</th>
+                    <th scope="col">Fan Level</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (var i = 0; i < userStatistics.length; i++) { %>
+                  <tr>
+                    <td><%= userStatistics[i].genre %></td>
+                    <td><%= userStatistics[i].play_time %></td>
+                    <td><%= userStatistics[i].num_game %></td>
+                    <td><%= userStatistics[i].avg_pop %></td>
+                    <td><%= userStatistics[i].fan_level %></td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

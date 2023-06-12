@@ -1,0 +1,83 @@
+<% var error; %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <!-- Add any necessary CSS and JavaScript files here -->
+    <style>
+        /* Add your custom CSS styling here */
+        body {
+            background-color: #f8f8f8;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        input[type="email"],
+        input[type="password"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f8f8f8;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .signup-link a {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Login</h1>
+    <form action="/login_verify" method="post">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Login">
+
+        <% if (locals.error) { %>
+            <p style="color: red;"><%= error %></p>
+        <% } %>
+
+        <% if (locals.match_error) { %>
+            <p style="color: red;"><%= match_error %></p>
+        <% } %>
+
+    </form>
+    <div class="signup-link">
+        Don't have an account? <a href="/signup">Sign up</a>
+    </div>
+</div>
+</body>
+</html>

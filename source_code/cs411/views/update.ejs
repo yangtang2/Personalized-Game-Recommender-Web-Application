@@ -1,0 +1,48 @@
+<% var success, default_vals; %>
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/header') %>
+  <link href="stylesheets/add.css" rel="stylesheet" type="text/css" />
+  <body>
+    <%- include('partials/navbar') %>
+    <h1>Add a Game</h1>
+    <form class="addForm" action="update_button" method="post">
+      <input type="hidden" name="id" value="<%= default_vals.game_id %>"/>
+      <label for="game-name">Game Name</label>
+      <input type="text" id="game-name" name="game_name" value= "<%= default_vals.name %>" required />
+
+      <label for="game-description">Game Description</label>
+      <textarea
+        id="game-description"
+        name="game_description"
+        rows="5"
+        required
+      ><%= default_vals.description %></textarea>
+
+      <label for="game-link"
+        >Link to Game <span class="optional">(Optional)</span></label
+      >
+      <input type="text" id="game-link" name="game_link" value= "<%= default_vals.game_link %>" />
+
+      <label for="game-image"
+        >Link to Game Image <span class="optional">(Optional)</span></label
+      >
+      <input type="text" id="game-image" name="game_image" value= "<%= default_vals.image_link %>" />
+
+      <input type="submit" value="Submit" />
+    </form>
+    <% if (locals.success) { %>
+    <div
+      style="
+        background-color: #2ecc71;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+      "
+    >
+      <h1>Your game has been successfully added!</h1>
+    </div>
+    <% } %> <%- include('partials/footer') %>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<% var games; %>
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/header') %>
+  <body>
+    <%- include('partials/navbar') %>
+    <div class="container mt-4">
+      <div class="card">
+        <div class="card-body">
+          <h3>Games</h3>
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Popularity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (var i = 0; i < games.length; i++) { %>
+              <tr>
+                <td><%= games[i].game_id %></td>
+                <td><%= games[i].name %></td>
+                <td><%= games[i].popularity %></td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
